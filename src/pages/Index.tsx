@@ -10,7 +10,7 @@ const Index = () => {
           {/* Hero Section */}
           <div className="space-y-4">
             <h1 className="text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              Avvial
+              Aviral
             </h1>
             <p className="text-2xl text-foreground/80">
               Event Management Portal

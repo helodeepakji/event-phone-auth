@@ -6,7 +6,7 @@ const DashboardBanner = () => {
       <div className="relative z-10 text-center text-primary-foreground">
         <div className="flex items-center justify-center gap-2 mb-3">
           <Sparkles className="w-6 h-6" />
-          <h2 className="text-2xl font-bold">Welcome to Avvial</h2>
+          <h2 className="text-2xl font-bold">Welcome to Aviral</h2>
           <Sparkles className="w-6 h-6" />
         </div>
         <p className="text-primary-foreground/90 max-w-md mx-auto">

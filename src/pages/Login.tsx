@@ -58,7 +58,7 @@ const Login = () => {
     // Simulate OTP verification
     toast({
       title: "Login Successful",
-      description: "Welcome to Avvial",
+      description: "Welcome to Aviral",
     });
     navigate("/dashboard");
   };
@@ -72,7 +72,7 @@ const Login = () => {
               <Smartphone className="w-8 h-8 text-primary-foreground" />
             </div>
             <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              Avvial
+              Aviral
             </h1>
             <p className="text-muted-foreground">
               {step === "phone" ? "Enter your phone number" : "Verify your identity"}

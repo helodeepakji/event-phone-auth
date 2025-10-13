@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, Search, Bell, Home, Calendar, FileText, User } from "lucide-react";
+import { Menu, Search, Bell, Home, Calendar, FileText, User, QrCode } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,7 +30,7 @@ const Dashboard = () => {
             </SheetContent>
           </Sheet>
           <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            Avvial
+            Aviral
           </h1>
         </div>
 
@@ -130,11 +130,11 @@ const Dashboard = () => {
           </button>
 
           <button
-            onClick={() => setActiveTab("logo")}
+            onClick={() => setActiveTab("qr")}
             className="flex flex-col items-center justify-center"
           >
             <div className="w-12 h-12 -mt-6 bg-gradient-primary rounded-full flex items-center justify-center shadow-medium">
-              <div className="w-6 h-6 bg-primary-foreground rounded-full"></div>
+              <QrCode className="w-6 h-6 text-primary-foreground" />
             </div>
           </button>
 

@@ -1,5 +1,6 @@
 import { Camera, QrCode, Share2, Hash, User, GraduationCap, Briefcase, Users, Globe, Settings } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const menuItems = [
   { icon: Camera, label: "Photo", onClick: () => {} },
@@ -19,6 +20,22 @@ const profileSections = [
 const ProfileMenu = () => {
   return (
     <div className="py-4 space-y-4">
+      {/* Profile Image */}
+      <div className="flex flex-col items-center gap-3 px-4 pb-4">
+        <Avatar className="w-24 h-24">
+          <AvatarImage src="/placeholder.svg" alt="Profile" />
+          <AvatarFallback className="bg-gradient-primary text-primary-foreground text-2xl">
+            <User className="w-12 h-12" />
+          </AvatarFallback>
+        </Avatar>
+        <div className="text-center">
+          <h3 className="font-semibold text-lg">User Name</h3>
+          <p className="text-sm text-muted-foreground">user@example.com</p>
+        </div>
+      </div>
+
+      <Separator />
+
       {/* Quick Actions */}
       <div className="space-y-2">
         {menuItems.map((item, index) => {
