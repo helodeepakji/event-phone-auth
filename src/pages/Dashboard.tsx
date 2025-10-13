@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Menu, Search, Bell, Home, Calendar, FileText, User, QrCode } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,7 @@ import ProfileMenu from "@/components/ProfileMenu";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -71,26 +73,32 @@ const Dashboard = () => {
             </TabsList>
             <TabsContent value="news" className="mt-4 space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Card className="shadow-subtle hover:shadow-medium transition-shadow">
+                <Card 
+                  className="shadow-subtle hover:shadow-medium transition-shadow cursor-pointer"
+                  onClick={() => navigate("/volunteers")}
+                >
                   <CardContent className="p-6">
                     <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg mb-4 flex items-center justify-center">
                       <Calendar className="w-12 h-12 text-primary" />
                     </div>
-                    <h3 className="font-semibold text-lg mb-2">Graphs</h3>
+                    <h3 className="font-semibold text-lg mb-2">Volunteers</h3>
                     <p className="text-sm text-muted-foreground">
-                      View analytics and statistics
+                      View volunteer directory
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="shadow-subtle hover:shadow-medium transition-shadow">
+                <Card 
+                  className="shadow-subtle hover:shadow-medium transition-shadow cursor-pointer"
+                  onClick={() => navigate("/registration")}
+                >
                   <CardContent className="p-6">
                     <div className="aspect-video bg-gradient-to-br from-accent/10 to-primary/10 rounded-lg mb-4 flex items-center justify-center">
                       <FileText className="w-12 h-12 text-accent" />
                     </div>
-                    <h3 className="font-semibold text-lg mb-2">Join RSS</h3>
+                    <h3 className="font-semibold text-lg mb-2">Complete Registration</h3>
                     <p className="text-sm text-muted-foreground">
-                      Subscribe to updates
+                      Fill your volunteer profile
                     </p>
                   </CardContent>
                 </Card>
@@ -110,7 +118,7 @@ const Dashboard = () => {
       <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-strong">
         <div className="grid grid-cols-5 h-16">
           <button
-            onClick={() => setActiveTab("home")}
+            onClick={() => { setActiveTab("home"); navigate("/dashboard"); }}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
               activeTab === "home" ? "text-primary" : "text-muted-foreground"
             }`}
@@ -120,7 +128,7 @@ const Dashboard = () => {
           </button>
 
           <button
-            onClick={() => setActiveTab("events")}
+            onClick={() => { setActiveTab("events"); navigate("/events"); }}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
               activeTab === "events" ? "text-primary" : "text-muted-foreground"
             }`}
@@ -139,17 +147,17 @@ const Dashboard = () => {
           </button>
 
           <button
-            onClick={() => setActiveTab("journals")}
+            onClick={() => { setActiveTab("journals"); navigate("/calendar"); }}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
               activeTab === "journals" ? "text-primary" : "text-muted-foreground"
             }`}
           >
             <FileText className="w-5 h-5" />
-            <span className="text-xs">Journals</span>
+            <span className="text-xs">Calendar</span>
           </button>
 
           <button
-            onClick={() => setActiveTab("profile")}
+            onClick={() => { setActiveTab("profile"); navigate("/profile"); }}
             className={`flex flex-col items-center justify-center gap-1 transition-colors ${
               activeTab === "profile" ? "text-primary" : "text-muted-foreground"
             }`}
