@@ -1,0 +1,166 @@
+import { useState } from "react";
+import { Menu, Search, Bell, Home, Calendar, FileText, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import DashboardBanner from "@/components/DashboardBanner";
+import ProfileMenu from "@/components/ProfileMenu";
+
+const Dashboard = () => {
+  const [activeTab, setActiveTab] = useState("home");
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header */}
+      <header className="bg-card border-b border-border px-4 py-3 flex items-center justify-between sticky top-0 z-50 shadow-subtle">
+        <div className="flex items-center gap-3">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="w-5 h-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-80">
+              <SheetHeader>
+                <SheetTitle>Menu</SheetTitle>
+              </SheetHeader>
+              <ProfileMenu />
+            </SheetContent>
+          </Sheet>
+          <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            Avvial
+          </h1>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Button variant="ghost" size="icon">
+            <Search className="w-5 h-5" />
+          </Button>
+          <Button variant="ghost" size="icon" className="relative">
+            <Bell className="w-5 h-5" />
+            <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
+          </Button>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <User className="w-5 h-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-80">
+              <SheetHeader>
+                <SheetTitle>Profile</SheetTitle>
+              </SheetHeader>
+              <ProfileMenu />
+            </SheetContent>
+          </Sheet>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto pb-20">
+        <DashboardBanner />
+
+        {/* News/Display Section */}
+        <div className="px-4 py-6">
+          <Tabs defaultValue="news" className="w-full">
+            <TabsList className="w-full grid grid-cols-2">
+              <TabsTrigger value="news">News</TabsTrigger>
+              <TabsTrigger value="display">Display</TabsTrigger>
+            </TabsList>
+            <TabsContent value="news" className="mt-4 space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Card className="shadow-subtle hover:shadow-medium transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="aspect-video bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg mb-4 flex items-center justify-center">
+                      <Calendar className="w-12 h-12 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-lg mb-2">Graphs</h3>
+                    <p className="text-sm text-muted-foreground">
+                      View analytics and statistics
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="shadow-subtle hover:shadow-medium transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="aspect-video bg-gradient-to-br from-accent/10 to-primary/10 rounded-lg mb-4 flex items-center justify-center">
+                      <FileText className="w-12 h-12 text-accent" />
+                    </div>
+                    <h3 className="font-semibold text-lg mb-2">Join RSS</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Subscribe to updates
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+            <TabsContent value="display" className="mt-4">
+              <div className="text-center py-12 text-muted-foreground">
+                <FileText className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                <p>Display content will appear here</p>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </main>
+
+      {/* Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-strong">
+        <div className="grid grid-cols-5 h-16">
+          <button
+            onClick={() => setActiveTab("home")}
+            className={`flex flex-col items-center justify-center gap-1 transition-colors ${
+              activeTab === "home" ? "text-primary" : "text-muted-foreground"
+            }`}
+          >
+            <Home className="w-5 h-5" />
+            <span className="text-xs">Home</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("events")}
+            className={`flex flex-col items-center justify-center gap-1 transition-colors ${
+              activeTab === "events" ? "text-primary" : "text-muted-foreground"
+            }`}
+          >
+            <Calendar className="w-5 h-5" />
+            <span className="text-xs">Events</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("logo")}
+            className="flex flex-col items-center justify-center"
+          >
+            <div className="w-12 h-12 -mt-6 bg-gradient-primary rounded-full flex items-center justify-center shadow-medium">
+              <div className="w-6 h-6 bg-primary-foreground rounded-full"></div>
+            </div>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("journals")}
+            className={`flex flex-col items-center justify-center gap-1 transition-colors ${
+              activeTab === "journals" ? "text-primary" : "text-muted-foreground"
+            }`}
+          >
+            <FileText className="w-5 h-5" />
+            <span className="text-xs">Journals</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("profile")}
+            className={`flex flex-col items-center justify-center gap-1 transition-colors ${
+              activeTab === "profile" ? "text-primary" : "text-muted-foreground"
+            }`}
+          >
+            <User className="w-5 h-5" />
+            <span className="text-xs">Profile</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  );
+};
+
+export default Dashboard;
