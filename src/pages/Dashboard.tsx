@@ -1,17 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Menu, Search, Bell, Home, Calendar, FileText, User, QrCode } from "lucide-react";
+import { Menu, Search, Bell, Home, Calendar, FileText, User, QrCode, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import DashboardBanner from "@/components/DashboardBanner";
 import ProfileMenu from "@/components/ProfileMenu";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const navigate = useNavigate();
+
+  const notifications = [
+    { id: 1, title: "New Event", message: "Republic Day Celebration on 26th January", time: "2 hours ago", unread: true },
+    { id: 2, title: "Profile Update", message: "Please complete your registration", time: "1 day ago", unread: true },
+    { id: 3, title: "Reminder", message: "Weekly Shakha tomorrow at 6 AM", time: "2 days ago", unread: false },
+  ];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -40,10 +48,40 @@ const Dashboard = () => {
           <Button variant="ghost" size="icon">
             <Search className="w-5 h-5" />
           </Button>
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="w-5 h-5" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
-          </Button>
+          <Sheet open={notificationsOpen} onOpenChange={setNotificationsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="relative">
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-80">
+              <SheetHeader>
+                <SheetTitle>Notifications</SheetTitle>
+              </SheetHeader>
+              <ScrollArea className="h-[calc(100vh-5rem)] mt-4">
+                <div className="space-y-2">
+                  {notifications.map((notif) => (
+                    <div 
+                      key={notif.id}
+                      className={`p-4 rounded-lg border ${notif.unread ? 'bg-primary/5 border-primary/20' : 'bg-card'}`}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-sm">{notif.title}</h4>
+                          <p className="text-xs text-muted-foreground mt-1">{notif.message}</p>
+                          <span className="text-xs text-muted-foreground mt-2 block">{notif.time}</span>
+                        </div>
+                        {notif.unread && (
+                          <div className="w-2 h-2 bg-primary rounded-full mt-1"></div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </SheetContent>
+          </Sheet>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -72,6 +110,25 @@ const Dashboard = () => {
               <TabsTrigger value="display">Display</TabsTrigger>
             </TabsList>
             <TabsContent value="news" className="mt-4 space-y-4">
+              {/* News Marquee */}
+              <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-lg p-4 overflow-hidden border border-primary/20">
+                <h3 className="font-semibold mb-2 text-sm text-muted-foreground">Latest Updates</h3>
+                <div className="relative overflow-hidden">
+                  <div className="flex animate-marquee whitespace-nowrap">
+                    <span className="inline-block mx-4">🎉 Republic Day Celebration - 26th January 2025</span>
+                    <span className="inline-block mx-4">📢 New Volunteer Registration Open</span>
+                    <span className="inline-block mx-4">🏆 Annual Sports Event - Register Now</span>
+                    <span className="inline-block mx-4">📚 Weekly Shakha - Every Sunday 6 AM</span>
+                    <span className="inline-block mx-4">🎯 Youth Leadership Program Starting Soon</span>
+                    <span className="inline-block mx-4">🎉 Republic Day Celebration - 26th January 2025</span>
+                    <span className="inline-block mx-4">📢 New Volunteer Registration Open</span>
+                    <span className="inline-block mx-4">🏆 Annual Sports Event - Register Now</span>
+                    <span className="inline-block mx-4">📚 Weekly Shakha - Every Sunday 6 AM</span>
+                    <span className="inline-block mx-4">🎯 Youth Leadership Program Starting Soon</span>
+                  </div>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Card 
                   className="shadow-subtle hover:shadow-medium transition-shadow cursor-pointer"
