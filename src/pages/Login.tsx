@@ -6,7 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { toast } from "@/hooks/use-toast";
-import { Smartphone, Shield } from "lucide-react";
+import { Smartphone, Shield, Mail } from "lucide-react";
+import aviralLogo from "@/assets/aviral-logo.jpeg";
 
 const countryCodes = [
   { code: "+1", country: "US" },
@@ -21,7 +22,10 @@ const Login = () => {
   const [step, setStep] = useState<"phone" | "otp">("phone");
   const [countryCode, setCountryCode] = useState("+91");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
+  
+  const isIndianNumber = countryCode === "+91";
 
   const handleSendOTP = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,11 +39,27 @@ const Login = () => {
       return;
     }
 
+    if (!isIndianNumber && !email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
     // Simulate sending OTP
-    toast({
-      title: "OTP Sent",
-      description: `Verification code sent to ${countryCode} ${phoneNumber}`,
-    });
+    if (isIndianNumber) {
+      toast({
+        title: "OTP Sent",
+        description: `Verification code sent to ${countryCode} ${phoneNumber}`,
+      });
+    } else {
+      toast({
+        title: "OTP Sent",
+        description: `Verification code sent to ${email}`,
+      });
+    }
     setStep("otp");
   };
 
@@ -68,14 +88,14 @@ const Login = () => {
       <div className="w-full max-w-md">
         <div className="bg-card rounded-2xl shadow-strong p-8 space-y-6">
           <div className="text-center space-y-2">
-            <div className="w-16 h-16 bg-gradient-primary rounded-2xl mx-auto flex items-center justify-center mb-4">
-              <Smartphone className="w-8 h-8 text-primary-foreground" />
+            <div className="w-24 h-24 mx-auto flex items-center justify-center mb-4">
+              <img src={aviralLogo} alt="Aviral Logo" className="w-full h-full object-contain" />
             </div>
             <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
               Aviral
             </h1>
             <p className="text-muted-foreground">
-              {step === "phone" ? "Enter your phone number" : "Verify your identity"}
+              {step === "phone" ? (isIndianNumber ? "Enter your phone number" : "Enter your details") : "Verify your identity"}
             </p>
           </div>
 
@@ -108,6 +128,20 @@ const Login = () => {
                 </div>
               </div>
 
+              {!isIndianNumber && (
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full"
+                  />
+                </div>
+              )}
+
               <Button type="submit" className="w-full bg-gradient-primary hover:opacity-90 transition-opacity">
                 Send OTP
               </Button>
@@ -116,18 +150,25 @@ const Login = () => {
             <form onSubmit={handleVerifyOTP} className="space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-center">
-                  <Shield className="w-12 h-12 text-primary" />
+                  {isIndianNumber ? (
+                    <Smartphone className="w-12 h-12 text-primary" />
+                  ) : (
+                    <Mail className="w-12 h-12 text-primary" />
+                  )}
                 </div>
                 <div className="text-center space-y-1">
                   <p className="text-sm text-muted-foreground">
-                    Code sent to {countryCode} {phoneNumber}
+                    {isIndianNumber 
+                      ? `Code sent to ${countryCode} ${phoneNumber}`
+                      : `Code sent to ${email}`
+                    }
                   </p>
                   <button
                     type="button"
                     onClick={() => setStep("phone")}
                     className="text-sm text-primary hover:underline"
                   >
-                    Change number
+                    Change {isIndianNumber ? "number" : "details"}
                   </button>
                 </div>
 
