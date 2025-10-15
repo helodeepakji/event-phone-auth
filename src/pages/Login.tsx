@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/SimpleButton";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { Label } from "@/components/SimpleLabel";
+import { SimpleOTPInput } from "@/components/SimpleOTPInput";
 import { toast } from "@/hooks/use-toast";
 import { Smartphone, Mail } from "lucide-react";
 import aviralLogo from "@/assets/aviral-logo.jpeg";
-import { CountrySelect } from "@/components/CountrySelect";
+import { SimpleCountrySelect } from "@/components/SimpleCountrySelect";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -96,7 +96,7 @@ const Login = () => {
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
                 <div className="flex gap-2">
-                  <CountrySelect value={countryCode} onValueChange={setCountryCode} />
+                  <SimpleCountrySelect value={countryCode} onValueChange={setCountryCode} />
                   <Input
                     id="phone"
                     type="tel"
@@ -154,16 +154,7 @@ const Login = () => {
                 </div>
 
                 <div className="flex justify-center">
-                  <InputOTP maxLength={6} value={otp} onChange={setOtp}>
-                    <InputOTPGroup>
-                      <InputOTPSlot index={0} />
-                      <InputOTPSlot index={1} />
-                      <InputOTPSlot index={2} />
-                      <InputOTPSlot index={3} />
-                      <InputOTPSlot index={4} />
-                      <InputOTPSlot index={5} />
-                    </InputOTPGroup>
-                  </InputOTP>
+                  <SimpleOTPInput value={otp} onChange={setOtp} length={6} />
                 </div>
               </div>
 
