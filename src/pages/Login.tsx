@@ -3,19 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { toast } from "@/hooks/use-toast";
-import { Smartphone, Shield, Mail } from "lucide-react";
+import { Smartphone, Mail } from "lucide-react";
 import aviralLogo from "@/assets/aviral-logo.jpeg";
-
-const countryCodes = [
-  { code: "+1", country: "US" },
-  { code: "+44", country: "UK" },
-  { code: "+91", country: "IN" },
-  { code: "+86", country: "CN" },
-  { code: "+81", country: "JP" },
-];
+import { CountrySelect } from "@/components/CountrySelect";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -104,18 +96,7 @@ const Login = () => {
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
                 <div className="flex gap-2">
-                  <Select value={countryCode} onValueChange={setCountryCode}>
-                    <SelectTrigger className="w-28">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {countryCodes.map((item) => (
-                        <SelectItem key={item.code} value={item.code}>
-                          {item.country} {item.code}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <CountrySelect value={countryCode} onValueChange={setCountryCode} />
                   <Input
                     id="phone"
                     type="tel"
