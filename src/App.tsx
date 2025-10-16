@@ -11,6 +11,7 @@ import Events from "./pages/Events";
 import Profile from "./pages/Profile";
 import CalendarPage from "./pages/CalendarPage";
 import Volunteers from "./pages/Volunteers";
+import QRScanner from "./pages/QRScanner";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/profile" element={<Profile />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/volunteers" element={<Volunteers />} />
+          <Route path="/qr-scanner" element={<QRScanner />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -195,7 +195,7 @@ const Dashboard = () => {
           </button>
 
           <button
-            onClick={() => setActiveTab("qr")}
+            onClick={() => { setActiveTab("qr"); navigate("/qr-scanner"); }}
             className="flex flex-col items-center justify-center"
           >
             <div className="w-12 h-12 -mt-6 bg-gradient-primary rounded-full flex items-center justify-center shadow-medium">
