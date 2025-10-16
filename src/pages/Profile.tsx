@@ -6,6 +6,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -20,7 +22,14 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full">
+        <AppSidebar />
+        <div className="flex-1 bg-background pb-20">
+          {/* Sidebar Toggle Button */}
+          <div className="fixed top-4 left-4 z-50">
+            <SidebarTrigger />
+          </div>
       {/* Header */}
       <header className="bg-gradient-primary text-primary-foreground px-4 py-6">
         <div className="max-w-4xl mx-auto">
@@ -129,7 +138,7 @@ const Profile = () => {
                 <TabsTrigger value="social">Social</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="personal" className="space-y-4 pt-4">
+              <TabsContent value="personal" id="personal" className="space-y-4 pt-4">
                 <ProfileField label="Full Name" value="Ramesh Kumar" />
                 <Separator />
                 <ProfileField label="Mobile" value="+91 98765 43210" />
@@ -143,7 +152,7 @@ const Profile = () => {
                 <ProfileField label="Gender" value="Male" />
               </TabsContent>
 
-              <TabsContent value="education" className="space-y-4 pt-4">
+              <TabsContent value="education" id="education" className="space-y-4 pt-4">
                 <ProfileField label="Highest Qualification" value="B.Tech Computer Science" />
                 <Separator />
                 <ProfileField label="University" value="Delhi University" />
@@ -151,7 +160,7 @@ const Profile = () => {
                 <ProfileField label="Year of Passing" value="2019" />
               </TabsContent>
 
-              <TabsContent value="professional" className="space-y-4 pt-4">
+              <TabsContent value="professional" id="professional" className="space-y-4 pt-4">
                 <ProfileField label="Occupation" value="Software Engineer" />
                 <Separator />
                 <ProfileField label="Company" value="Tech Solutions Pvt Ltd" />
@@ -161,7 +170,7 @@ const Profile = () => {
                 <ProfileField label="Skills" value="Web Development, Project Management" />
               </TabsContent>
 
-              <TabsContent value="sanghs" className="space-y-4 pt-4">
+              <TabsContent value="sanghs" id="sanghs" className="space-y-4 pt-4">
                 <ProfileField label="Current Role" value="Swayamsevak" />
                 <Separator />
                 <ProfileField label="Years Associated" value="8 years" />
@@ -173,7 +182,7 @@ const Profile = () => {
                 <ProfileField label="Shakha Location" value="Connaught Place Shakha" />
               </TabsContent>
 
-              <TabsContent value="social" className="space-y-4 pt-4">
+              <TabsContent value="social" id="social" className="space-y-4 pt-4">
                 <ProfileField label="Cultural Skills" value="Music - Harmonium" />
                 <Separator />
                 <ProfileField label="Performance Experience" value="Regional cultural programs" />
@@ -214,7 +223,9 @@ const Profile = () => {
           </Card>
         </div>
       </div>
-    </div>
+        </div>
+      </div>
+    </SidebarProvider>
   );
 };
 
