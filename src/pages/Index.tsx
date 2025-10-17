@@ -10,13 +10,13 @@ const Index = () => {
           {/* Hero Section */}
           <div className="space-y-4">
             <h1 className="text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              Aviral
+              Rashtriya Swayamsevak Sangh
             </h1>
             <p className="text-2xl text-foreground/80">
-              Event Management Portal
+              Nation Building Through Selfless Service
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Streamline your events, connect with communities, and manage everything in one place
+              RSS is the world's largest voluntary organization dedicated to nation-building through character formation, social harmony, and cultural renaissance. Join millions of volunteers in serving Bharat with dedication and discipline.
             </p>
           </div>
 
@@ -36,9 +36,9 @@ const Index = () => {
               <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                 <Calendar className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Event Management</h3>
+              <h3 className="font-semibold text-lg mb-2">Event Participation</h3>
               <p className="text-muted-foreground text-sm">
-                Create, organize, and manage events effortlessly
+                Join shakhas, camps, and community service activities across India
               </p>
             </div>
 
@@ -46,9 +46,9 @@ const Index = () => {
               <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
                 <Users className="w-6 h-6 text-accent" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Community Connect</h3>
+              <h3 className="font-semibold text-lg mb-2">Volunteer Network</h3>
               <p className="text-muted-foreground text-sm">
-                Build and engage with your communities
+                Connect with lakhs of swayamsevaks dedicated to serving society
               </p>
             </div>
 
@@ -56,9 +56,9 @@ const Index = () => {
               <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                 <TrendingUp className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Analytics & Insights</h3>
+              <h3 className="font-semibold text-lg mb-2">Character Building</h3>
               <p className="text-muted-foreground text-sm">
-                Track performance and make data-driven decisions
+                Develop leadership, discipline, and values through structured training
               </p>
             </div>
           </div>
