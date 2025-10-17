@@ -1,4 +1,5 @@
-import { Camera, QrCode, Share2, Hash, User, GraduationCap, Briefcase, Users, Globe, Settings } from "lucide-react";
+import { Camera, QrCode, Share2, Hash, User, GraduationCap, Briefcase, Users, Globe, Settings, Shield } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -20,6 +21,7 @@ const profileSections = [
 ];
 
 const ProfileMenu = () => {
+  const navigate = useNavigate();
   const profileCompletion = 65; // Calculate based on filled fields
 
   return (
@@ -89,11 +91,20 @@ const ProfileMenu = () => {
 
       <Separator />
 
-      {/* Settings */}
-      <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left">
-        <Settings className="w-5 h-5 text-primary" />
-        <span className="font-medium">Settings</span>
-      </button>
+      {/* Admin & Settings */}
+      <div className="space-y-1">
+        <button 
+          onClick={() => navigate("/admin")}
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left"
+        >
+          <Shield className="w-5 h-5 text-primary" />
+          <span className="font-medium">Admin Panel</span>
+        </button>
+        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-left">
+          <Settings className="w-5 h-5 text-primary" />
+          <span className="font-medium">Settings</span>
+        </button>
+      </div>
       </div>
     </ScrollArea>
   );
