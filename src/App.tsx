@@ -12,8 +12,14 @@ import Profile from "./pages/Profile";
 import CalendarPage from "./pages/CalendarPage";
 import Volunteers from "./pages/Volunteers";
 import QRScanner from "./pages/QRScanner";
-import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import AdminLayout from "./components/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminEvents from "./pages/admin/AdminEvents";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminEventVolunteers from "./pages/admin/AdminEventVolunteers";
+import AdminNotifications from "./pages/admin/AdminNotifications";
+import AdminForms from "./pages/admin/AdminForms";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +39,14 @@ const App = () => (
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/volunteers" element={<Volunteers />} />
           <Route path="/qr-scanner" element={<QRScanner />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="events" element={<AdminEvents />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="event-volunteers" element={<AdminEventVolunteers />} />
+            <Route path="notifications" element={<AdminNotifications />} />
+            <Route path="forms" element={<AdminForms />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
