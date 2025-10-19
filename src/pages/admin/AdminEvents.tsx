@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Calendar, Edit2, Trash2, Eye } from "lucide-react";
+import { Calendar, Edit2, Trash2, Eye, Filter } from "lucide-react";
 
 interface Event {
   id: string;
@@ -31,6 +31,11 @@ const AdminEvents = () => {
     date: "",
     location: "",
     description: "",
+  });
+
+  const [dateRange, setDateRange] = useState({
+    startDate: "",
+    endDate: "",
   });
 
   const handleCreateEvent = (e: React.FormEvent) => {
@@ -65,6 +70,17 @@ const AdminEvents = () => {
       default: return "bg-gray-500";
     }
   };
+
+  const filteredEvents = events.filter(event => {
+    const eventDate = new Date(event.date);
+    const startDate = dateRange.startDate ? new Date(dateRange.startDate) : null;
+    const endDate = dateRange.endDate ? new Date(dateRange.endDate) : null;
+
+    if (startDate && eventDate < startDate) return false;
+    if (endDate && eventDate > endDate) return false;
+
+    return true;
+  });
 
   return (
     <div className="space-y-6">
@@ -130,7 +146,35 @@ const AdminEvents = () => {
         <CardHeader>
           <CardTitle>All Events</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end">
+            <div className="flex-1 space-y-2">
+              <Label htmlFor="start-date">Start Date</Label>
+              <Input
+                id="start-date"
+                type="date"
+                value={dateRange.startDate}
+                onChange={(e) => setDateRange({ ...dateRange, startDate: e.target.value })}
+              />
+            </div>
+            <div className="flex-1 space-y-2">
+              <Label htmlFor="end-date">End Date</Label>
+              <Input
+                id="end-date"
+                type="date"
+                value={dateRange.endDate}
+                onChange={(e) => setDateRange({ ...dateRange, endDate: e.target.value })}
+              />
+            </div>
+            <Button
+              variant="outline"
+              onClick={() => setDateRange({ startDate: "", endDate: "" })}
+            >
+              <Filter className="h-4 w-4 mr-2" />
+              Clear Filters
+            </Button>
+          </div>
+
           <Table>
             <TableHeader>
               <TableRow>
@@ -143,7 +187,7 @@ const AdminEvents = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {events.map((event) => (
+              {filteredEvents.map((event) => (
                 <TableRow key={event.id}>
                   <TableCell className="font-medium">{event.name}</TableCell>
                   <TableCell>{event.date}</TableCell>
