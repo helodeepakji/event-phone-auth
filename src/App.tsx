@@ -20,6 +20,7 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import AdminEventVolunteers from "./pages/admin/AdminEventVolunteers";
 import AdminNotifications from "./pages/admin/AdminNotifications";
 import AdminForms from "./pages/admin/AdminForms";
+import AdminUserDetails from "./pages/admin/AdminUserDetails";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
             <Route index element={<AdminDashboard />} />
             <Route path="events" element={<AdminEvents />} />
             <Route path="users" element={<AdminUsers />} />
+            <Route path="users/:id" element={<AdminUserDetails />} />
             <Route path="event-volunteers" element={<AdminEventVolunteers />} />
             <Route path="notifications" element={<AdminNotifications />} />
             <Route path="forms" element={<AdminForms />} />
